@@ -3,6 +3,32 @@ var ai = 'https://imagga.com/profile/dashboard#acc_1a2fa75f3805c60';
 //use hasimages
 //maybe use medium
 //artistOrCulture	
+
+function getDepartments() {
+    // Changes Api to include departments in the Met Museum
+    var searchUrl = api + 'departments';
+    fetch(searchUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // Loop thru all departments in Api
+            for (i in data) {
+
+                // Set items in local storage. Stringify so it can return as an array
+                localStorage.setItem('departments', JSON.stringify(Object.values(data[i])));
+                // Returns the departments stored in local storage.
+                var museumDepartment = JSON.parse(localStorage.getItem('departments')) || [];
+
+                console.log(museumDepartment[0].departmentId, museumDepartment[0].displayName)
+                console.log(Object.keys(data[i]))
+                console.log(Object.values(data[i]))
+            }
+            console.log(data[0])
+        });
+}
+
+getDepartments();
 function searchObjects() {
     var searchQuery = document.querySelector('#searchBar').value;
 
@@ -20,7 +46,7 @@ function searchObjects() {
             }
 
             // Randomly select multiple object IDs
-            var randomObjectIDs = getRandomElements(objectIDs, 9); // Change the number (3) to display more or fewer results
+            var randomObjectIDs = getRandomElements(objectIDs, 5); // Change the number (3) to display more or fewer results
 
             // Get object details for the selected object IDs
             var objectPromises = randomObjectIDs.map(objectID => {
