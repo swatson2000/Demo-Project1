@@ -6,25 +6,27 @@ var ai = 'https://imagga.com/profile/dashboard#acc_1a2fa75f3805c60';
 
 function getDepartments() {
     // Changes Api to include departments in the Met Museum
-    var searchUrl = api + 'departments';
+    var searchUrl = api + 'departments?per_page=3';
     fetch(searchUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            console.log('DATA:', data.departments[0])
             // Loop thru all departments in Api
-            for (i in data) {
+            for (var department of data.departments) {
+                console.log(department);
 
-                // Set items in local storage. Stringify so it can return as an array
-                localStorage.setItem('departments', JSON.stringify(Object.values(data[i])));
                 // Returns the departments stored in local storage.
                 var museumDepartment = JSON.parse(localStorage.getItem('departments')) || [];
-
-                console.log(museumDepartment[0].departmentId, museumDepartment[0].displayName)
-                console.log(Object.keys(data[i]))
-                console.log(Object.values(data[i]))
+                if (!museumDepartment.includes(department) ) {
+                    museumDepartment.push(department)
+                    console.log(museumDepartment)
+                    console.log(department)
+                }
+                // Set items in local storage. Stringify so it can return as an array
+                localStorage.setItem('departments', JSON.stringify(museumDepartment));
             }
-            console.log(data[0])
         });
 }
 
