@@ -1,5 +1,6 @@
 var api = 'https://collectionapi.metmuseum.org/public/collection/v1/';
 var ai = 'https://imagga.com/profile/dashboard#acc_1a2fa75f3805c60';
+var departmentList = {}
 //use hasimages
 //maybe use medium
 //artistOrCulture	
@@ -12,25 +13,65 @@ function getDepartments() {
             return response.json();
         })
         .then(function (data) {
+            // See where the data is nested
             console.log('DATA:', data.departments[0])
+            var departmentList = {};
             // Loop thru all departments in Api
             for (var department of data.departments) {
+                // Console logs the current department. Since it loops through, it should display all the departments available.
                 console.log(department);
 
                 // Returns the departments stored in local storage.
                 var museumDepartment = JSON.parse(localStorage.getItem('departments')) || [];
-                if (!museumDepartment.includes(department) ) {
+                // failure condition
+                if (!museumDepartment.includes(department)) {
                     museumDepartment.push(department)
-                    console.log(museumDepartment)
-                    console.log(department)
                 }
                 // Set items in local storage. Stringify so it can return as an array
                 localStorage.setItem('departments', JSON.stringify(museumDepartment));
+                
             }
+            console.log(museumDepartment[0].departmentId);
+            // Moved the items in local storage into a listed dictionary for easier access. 
+            for (var i = 0; i < museumDepartment.length; i++) {
+                departmentList[museumDepartment[i].displayName] = [museumDepartment[i].departmentId];
+            }
+            // departmentList is variable stored to access departments
+            console.log(departmentList)
+            // Accessing the departmentId of a given department
+            // console.log(departmentList[0][0])
+            // Accessing the displayName of the department
+            // console.log(departmentList[1][0])
+            viewDepartments();
         });
 }
 
+function viewDepartments () {
+    console.log(departmentList);
+
+    // Variables to use as sub for apibelow
+    // var qUrlKey = jk
+    // var departmentIdKey = jk
+
+
+    // Use local storage to input the 'q' and 'departmentId' using variables. MUST OBTAIN 'objectIDs' value
+    // var apiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/search?q=asian&departmentId=6&hasImages=true'
+
+    // fetch(apiUrl)
+    //     .then(function (response) {
+    //         return response.json();
+    //     })
+    //     .then(function (data) {
+    //         console.log(data);
+    //     });
+
+    var objectIDsKey = []
+    // Using the 'objectIDs' value, generate an image or something
+    // var apiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'+ 'CODE ID GOES HERE'
+}
+
 getDepartments();
+viewDepartments();
 function searchObjects() {
     var searchQuery = document.querySelector('#searchBar').value;
 
