@@ -8,18 +8,18 @@ var departmentList = {}
 function getDepartments() {
     // Changes Api to include departments in the Met Museum
     var searchUrl = api + 'departments?per_page=3';
+    console.log(searchUrl)
     fetch(searchUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            // See where the data is nested
-            console.log('DATA:', data.departments[0])
-            var departmentList = {};
+            // Hopefully this will empty the object/dictionary, but if not CHANGE
+            departmentList = {};
             // Loop thru all departments in Api
             for (var department of data.departments) {
                 // Console logs the current department. Since it loops through, it should display all the departments available.
-                console.log(department);
+                // console.log(department);
 
                 // Returns the departments stored in local storage.
                 var museumDepartment = JSON.parse(localStorage.getItem('departments')) || [];
@@ -29,49 +29,66 @@ function getDepartments() {
                 }
                 // Set items in local storage. Stringify so it can return as an array
                 localStorage.setItem('departments', JSON.stringify(museumDepartment));
-                
             }
-            console.log(museumDepartment[0].departmentId);
+            // Gets the value of the id for the department
+            // console.log(museumDepartment[0].departmentId);
+
             // Moved the items in local storage into a listed dictionary for easier access. 
             for (var i = 0; i < museumDepartment.length; i++) {
-                departmentList[museumDepartment[i].displayName] = [museumDepartment[i].departmentId];
+                departmentList[museumDepartment[i].displayName] = museumDepartment[i].departmentId;
             }
             // departmentList is variable stored to access departments
             console.log(departmentList)
-            // Accessing the departmentId of a given department
-            // console.log(departmentList[0][0])
-            // Accessing the displayName of the department
-            // console.log(departmentList[1][0])
-            viewDepartments();
+            // TODO Replace value with something the user input(based on departments)
+            viewObjectValue('Ancient Near Eastern Art');
         });
 }
 
-function viewDepartments () {
-    console.log(departmentList);
+function viewObjectValue (displayName) {
 
     // Variables to use as sub for apibelow
-    // var qUrlKey = jk
-    // var departmentIdKey = jk
+        // Stores the name of the department
+    var qUrlKey = displayName;
+        // Stores the ID number value
+    var departmentIdKey = departmentList[displayName]
 
 
     // Use local storage to input the 'q' and 'departmentId' using variables. MUST OBTAIN 'objectIDs' value
-    // var apiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/search?q=asian&departmentId=6&hasImages=true'
+    var apiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/search?q='+ qUrlKey +'&departmentId='+ departmentIdKey +'&hasImages=true'
+    console.log(apiUrl)
+    fetch(apiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            // Stores the objectIDs value (used for objectsApiUrl)
+            var objectIDsValue = [];
+            // Adds the first 20 ids into the array/list above
+            for (var i = 0; i < 20; i++) {
+                objectIDsValue.push(data.objectIDs[i]);
+            }
+            console.log(objectIDsValue)
+            getMuseumObject(objectIDsValue);
+        });
+};
 
-    // fetch(apiUrl)
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (data) {
-    //         console.log(data);
-    //     });
-
-    var objectIDsKey = []
-    // Using the 'objectIDs' value, generate an image or something
-    // var apiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'+ 'CODE ID GOES HERE'
+function getMuseumObject (ID) {
+    // Using the 'objectIDsValue' value, iterate through and use all for the api, generate an image or something. Likely needs loops
+    for (i = 0; i < ID.length; i++) {
+            var objectsApiUrl = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'+ ID[i]
+            fetch(objectsApiUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data)
+                });
+            console.log(objectsApiUrl)
+    }
 }
 
 getDepartments();
-viewDepartments();
 function searchObjects() {
     var searchQuery = document.querySelector('#searchBar').value;
 
