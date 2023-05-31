@@ -4,7 +4,7 @@ var departmentList = {}
 //use hasimages
 //maybe use medium
 //artistOrCulture	
-
+var museumId = document.querySelector('#museum')
 function getDepartments() {
     // Changes Api to include departments in the Met Museum
     var searchUrl = api + 'departments';
@@ -16,6 +16,8 @@ function getDepartments() {
         .then(function (data) {
             // Hopefully this will empty the object/dictionary, but if not CHANGE
             departmentList = {};
+            // Clears the previous clicked departments(if any)
+            museumId.innerHTML = '';
             localStorage.clear(museumDepartment);
             // Loop thru all departments in Api
             for (var department of data.departments) {
@@ -40,8 +42,7 @@ function getDepartments() {
             }
             // departmentList is variable stored to access departments
             console.log(departmentList)
-            // TODO Replace value with something the user input(based on departments)
-            var userInput = document.getElementById('searchBar').value;
+            var userInput = document.getElementById('department').value;
             console.log(userInput)
             viewObjectValue(userInput);
         });
@@ -95,7 +96,7 @@ function getMuseumObject (ID) {
                 containerEl.appendChild(titleEl)
                 containerEl.appendChild(imageEl);
 
-                document.querySelector('#museum').appendChild(containerEl);
+                museumId.appendChild(containerEl);
 
                 // TODO Making the layout based on all the info. 
             });
@@ -194,6 +195,6 @@ function getRandomElements(arr, count) {
 }
 
 document.querySelector('#submit').addEventListener('click', searchObjects);
-document.querySelector('#submit').addEventListener('click', getDepartments);
+document.querySelector('#department').addEventListener('click', getDepartments);
 
 
