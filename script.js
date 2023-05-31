@@ -7,7 +7,7 @@ var departmentList = {}
 
 function getDepartments() {
     // Changes Api to include departments in the Met Museum
-    var searchUrl = api + 'departments?per_page=3';
+    var searchUrl = api + 'departments';
     console.log(searchUrl)
     fetch(searchUrl)
         .then(function (response) {
@@ -66,14 +66,13 @@ function viewObjectValue (displayName) {
             // Stores the objectIDs value (used for objectsApiUrl)
             var objectIDsValue = [];
             // Adds the first 20 ids into the array/list above
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 15; i++) {
                 objectIDsValue.push(data.objectIDs[i]);
             }
             console.log(objectIDsValue)
             getMuseumObject(objectIDsValue);
         });
 };
-
 function getMuseumObject (ID) {
     // Using the 'objectIDsValue' value, iterate through and use all for the api, generate an image or something. Likely needs loops
     for (i = 0; i < ID.length; i++) {
@@ -84,6 +83,20 @@ function getMuseumObject (ID) {
             })
             .then(function (data) {
                 console.log(data)
+                console.log(data.title)
+                var containerEl = document.createElement('p');                
+                var titleEl = document.createElement('p')
+                var imageEl = document.createElement('img')
+
+                var imageMuseum = data.additionalImages[0]
+                titleEl.textContent = data.title;
+                imageEl.setAttribute('src', imageMuseum)
+
+                containerEl.appendChild(titleEl)
+                containerEl.appendChild(imageEl);
+
+                document.querySelector('#museum').appendChild(containerEl);
+
                 // TODO Making the layout based on all the info. 
             });
         console.log(objectsApiUrl)
@@ -181,5 +194,6 @@ function getRandomElements(arr, count) {
 }
 
 document.querySelector('#submit').addEventListener('click', searchObjects);
+document.querySelector('#submit').addEventListener('click', getDepartments);
 
 
