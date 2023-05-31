@@ -42,7 +42,9 @@ function getDepartments() {
             }
             // departmentList is variable stored to access departments
             console.log(departmentList)
+
             var userInput = document.getElementById('department').value;
+
             console.log(userInput)
             viewObjectValue(userInput);
         });
@@ -99,7 +101,6 @@ function getMuseumObject (ID) {
 
                 museumId.appendChild(containerEl);
 
-                // TODO Making the layout based on all the info. 
             });
         console.log(objectsApiUrl)
     }
