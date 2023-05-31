@@ -42,7 +42,9 @@ function getDepartments() {
             }
             // departmentList is variable stored to access departments
             console.log(departmentList)
-            var userInput = document.getElementById('department').children.value;
+
+            var userInput = document.getElementById('department').value;
+
             console.log(userInput)
             viewObjectValue(userInput);
         });
@@ -74,6 +76,7 @@ function viewObjectValue (displayName) {
             getMuseumObject(objectIDsValue);
         });
 };
+console.log('hi')
 function getMuseumObject (ID) {
     // Using the 'objectIDsValue' value, iterate through and use all for the api, generate an image or something. Likely needs loops
     for (i = 0; i < ID.length; i++) {
