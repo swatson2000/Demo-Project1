@@ -1,11 +1,65 @@
+body {
+background-image: url("okIskDW.png");
+background-position:center;
+background-size: 100%;
+background-position-y: 45%;
+background-color: antiquewhite;
+
+}
+
+h1 {
+ font-family:'Times New Roman', serif;
+ display:flex;
+ justify-content: center;
+ 
+}
+
+h2 {
+    font-family:'Times New Roman', serif;
+    display:flex;
+    justify-content: center;
+    
+   }
+   
+
+
+#searchBar {
+
+}
+
+#submit {
+
+}
+
+
+
+p {
+    font-family: 'Times New Roman', serif;
+ display:flex;
+ justify-content: center;
+ 
+}
+
+.text {
+
+}
+
 .gallery {
+    font-family:'Times New Roman', serif;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
+    border-width: 40px;
+
+
+
 }
 
 img {
    width: 300px;
    height:300px;
    object-fit: cover;
+   border-width: 20px;
+   border-color: goldenrod;
 }
+
