@@ -98,7 +98,6 @@ function getMuseumObject (ID) {
 
                 museumId.appendChild(containerEl);
 
-                // TODO Making the layout based on all the info. 
             });
         console.log(objectsApiUrl)
     }
