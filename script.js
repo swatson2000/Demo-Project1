@@ -74,6 +74,7 @@ function viewObjectValue (displayName) {
             getMuseumObject(objectIDsValue);
         });
 };
+console.log('hi')
 function getMuseumObject (ID) {
     // Using the 'objectIDsValue' value, iterate through and use all for the api, generate an image or something. Likely needs loops
     for (i = 0; i < ID.length; i++) {
