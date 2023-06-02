@@ -88,19 +88,23 @@ function getMuseumObject (ID) {
             .then(function (data) {
                 console.log(data)
                 console.log(data.title)
+                console.log(data.primaryImage)
+                if (!data.primaryImage == '') {
                 var containerEl = document.createElement('p');                
                 var titleEl = document.createElement('p')
                 var imageEl = document.createElement('img')
 
-                var imageMuseum = data.additionalImages[0]
+                var imageMuseum = data.primaryImage
                 titleEl.textContent = data.title;
                 imageEl.setAttribute('src', imageMuseum)
 
                 containerEl.appendChild(titleEl)
                 containerEl.appendChild(imageEl);
 
-                museumId.appendChild(containerEl);
-
+                museumId.appendChild(containerEl);    
+                } else {
+                    return
+                }
             });
         console.log(objectsApiUrl)
     }
