@@ -5,7 +5,7 @@
     The webpage was designed to inspect the Metropolitican Museum Art Collection. Users are able to navigate though the various departments that is within the Museum gallery. Only items with images will be displayed. All the information obtained is credited due to the Metropolitan Museum Api. Users can additionally type a one word topic of interest into the search result to generate five random art collections contained within the api. 
 
 ## Visuals
-![Alt text](Digital-Museum.png)
+![Alt text](assets/img/Digital-Museum.png)
 ## Installation
 
     None required
