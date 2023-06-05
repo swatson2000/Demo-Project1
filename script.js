@@ -89,7 +89,7 @@ function getMuseumObject (ID) {
                 console.log(data.title)
                 console.log(data.primaryImage)
                 if (!data.primaryImage == '') {
-                var containerEl = document.createElement('center');                
+                var containerEl = document.createElement('div');                
                 var titleEl = document.createElement('p')
                 var imageEl = document.createElement('img')
 
@@ -151,6 +151,7 @@ function searchObjects() {
                         // Create HTML elements for each result
                         var resultContainer = document.createElement('div');
                         resultContainer.classList.add('result-container');
+                        resultContainer.setAttribute('class', 'containers grid-item')
 
                         var titleElement = document.createElement('h2');
                         titleElement.textContent = objectTitle;
