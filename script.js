@@ -97,6 +97,8 @@ function getMuseumObject (ID) {
                 var imageMuseum = data.primaryImage
                 titleEl.textContent = data.title;
                 imageEl.setAttribute('src', imageMuseum)
+                containerEl.setAttribute('class', 'containers')
+                titleEl.setAttribute('class', 'artTitle')
 
                 containerEl.appendChild(titleEl)
                 containerEl.appendChild(imageEl);
