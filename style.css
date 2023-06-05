@@ -1,7 +1,6 @@
 /* CSS framework */
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
-
 html {
     background-image: url("okIskDW.png");
     background-position:center;
@@ -9,7 +8,10 @@ html {
     background-color: antiquewhite;
 }
 
-h1, h2 {
+nav {
+    background-color: rgba(131, 93, 36, 0.5);
+}
+h1, h2, nav, h3 {
         display: flex;
         justify-content: center;
         padding: 10px;
@@ -39,26 +41,30 @@ button{
     border-width: 40px;
 }
 
-.container {
-    width: 85vw;
+.grid-container {
     display: grid;
-    justify-items: center;
+    grid-template-columns: auto auto auto;
+    width: 85vw;    
+    padding: 1em;
+    margin-left: 180px;
     grid-column-gap: calc(8px + 0.25vw);
     grid-row-gap: calc(24px + 0.75vw);
 }
 .containers {
+    justify-content: space-evenly;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
     background-color: aliceblue;
-    border: 3px solid black;
+    border: 3px solid #b77b0e;
 }
 .artTitle {
     text-decoration: underline;
-    font-size: 20px;
+    width: 50%;
+    font-size: 15px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 5px;
+    text-align: center;
 }
 img {
    width: 300px;
@@ -66,6 +72,7 @@ img {
    object-fit: cover;
    border-width: 20px;
    border-color: goldenrod;
-   display: block;
+   display: flex;
+
 }
 
