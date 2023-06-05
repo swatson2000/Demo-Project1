@@ -69,7 +69,7 @@ function viewObjectValue (displayName) {
             // Stores the objectIDs value (used for objectsApiUrl)
             var objectIDsValue = [];
             // Adds the first 20 ids into the array/list above
-            for (var i = 0; i < 15; i++) {
+            for (var i = 0; i < 30; i++) {
                 objectIDsValue.push(data.objectIDs[i]);
             }
             console.log(objectIDsValue)
@@ -89,14 +89,14 @@ function getMuseumObject (ID) {
                 console.log(data.title)
                 console.log(data.primaryImage)
                 if (!data.primaryImage == '') {
-                var containerEl = document.createElement('p');                
+                var containerEl = document.createElement('center');                
                 var titleEl = document.createElement('p')
                 var imageEl = document.createElement('img')
 
                 var imageMuseum = data.primaryImage
                 titleEl.textContent = data.title;
                 imageEl.setAttribute('src', imageMuseum)
-                containerEl.setAttribute('class', 'containers')
+                containerEl.setAttribute('class', 'containers grid-item')
                 titleEl.setAttribute('class', 'artTitle')
 
                 containerEl.appendChild(titleEl)
